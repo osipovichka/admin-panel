@@ -6,3 +6,7 @@ spring:
     url: jdbc:postgresql://localhost/admin_panel
     username: postgres
     password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: none
