@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,4 +31,10 @@ public class Group {
 
     @Column(name = "course_program_id")
     private int courseProgramId;
+
+    @ManyToMany(mappedBy = "groups")
+    private List<Teacher> teachers;
+
+    @ManyToMany(mappedBy = "groups")
+    private List<Student> students;
 }
