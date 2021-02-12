@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +21,7 @@ public class CourseProgramSkill {
     private int courseProgramId;
 
     private String name;
+
+    @ManyToMany(mappedBy = "skills")
+    private List<Student> Student;
 }

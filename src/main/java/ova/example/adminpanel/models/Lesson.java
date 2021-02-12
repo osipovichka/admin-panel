@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,4 +28,11 @@ public class Lesson {
 
     private String read;
     private String videos;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "lesson_topic",
+            joinColumns = @JoinColumn(name = "lesson_id"),
+            inverseJoinColumns = @JoinColumn(name = "theme_details_id")
+    )
+    private List<ThemeDetails> themeDetails;
 }

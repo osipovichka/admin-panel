@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +21,7 @@ public class ThemeDetails {
     private int programDetailsId;
 
     private String topic;
+
+    @ManyToMany(mappedBy = "themeDetails")
+    private List<Lesson> lessons;
 }
