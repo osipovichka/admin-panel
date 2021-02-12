@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,4 +17,7 @@ public class Role {
     @Column(name = "id")
     private long id;
     private String name;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 }
