@@ -23,5 +23,5 @@ public class CourseProgramSkill {
     private String name;
 
     @ManyToMany(mappedBy = "skills")
-    private List<Student> Student;
+    private List<User> Student;
 }
