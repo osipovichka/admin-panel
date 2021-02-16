@@ -33,8 +33,8 @@ public class Group {
     private int courseProgramId;
 
     @ManyToMany(mappedBy = "groups")
-    private List<Teacher> teachers;
+    private List<User> teachers;
 
-    @ManyToMany(mappedBy = "groups")
-    private List<Student> students;
+    @ManyToMany(mappedBy = "group")
+    private List<User> students;
 }
