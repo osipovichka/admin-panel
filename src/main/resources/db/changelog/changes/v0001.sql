@@ -17,12 +17,12 @@ create table if not exists users
     first_name varchar(15) not null,
     last_name varchar(15) not null,
     patronymic varchar(15),
-    birth_date date not null,
+    birth_date date,
     email varchar(50) not null,
-    phone varchar(11) not null,
-    password varchar(255) not null,
-    city_id int not null references city (id),
-    registration_date date not null
+    phone varchar(11),
+    password varchar(255),
+    city_id int references city (id),
+    registration_date date
 );
 
 create table if not exists role
