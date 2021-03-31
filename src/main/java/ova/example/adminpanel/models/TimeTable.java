@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "time_table")
 public class TimeTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 

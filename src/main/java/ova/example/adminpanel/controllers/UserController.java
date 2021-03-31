@@ -56,7 +56,7 @@ public class UserController {
         user.setEmail(userDetails.getEmail());
         user.setPhone(userDetails.getPhone());
         user.setPassword(userDetails.getPassword());
-        user.setCityId(user.getCityId());
+        //user.setCityId(user.getCityId());
 
         User updateUser = userRepository.saveAndFlush(user);
 
