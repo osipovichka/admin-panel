@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,7 +39,7 @@ public class User {
     private String confirmPassword;
 
     @Column(name = "city_id")
-    private int cityId;
+    private Long cityId;
 
     @Column(name = "registration_date")
     private Date registrationDate;
@@ -57,19 +56,19 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    private List<Group> group;
+    private Set<Group> group;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "teacher_group",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    private List<Group> groups;
+    private Set<Group> groups;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_skill",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_program_skill_id")
     )
-    private List<CourseProgramSkill> skills;
+    private Set<CourseProgramSkill> skills;
 }

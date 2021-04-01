@@ -18,7 +18,7 @@ public class ThemeDetails {
     private long id;
 
     @Column(name = "program_details_id")
-    private int programDetailsId;
+    private Long programDetailsId;
 
     private String topic;
 

@@ -17,7 +17,7 @@ public class CourseProgram {
     private long id;
 
     @Column(name = "course_id")
-    private int courseId;
+    private Long courseId;
 
     @Column(name = "is_actual")
     private boolean isActual;

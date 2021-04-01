@@ -18,7 +18,7 @@ public class CourseProgramSkill {
     private long id;
 
     @Column(name = "course_program_id")
-    private int courseProgramId;
+    private Long courseProgramId;
 
     private String name;
 

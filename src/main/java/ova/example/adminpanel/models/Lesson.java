@@ -19,7 +19,7 @@ public class Lesson {
     private long id;
 
     @Column(name = "group_id")
-    private int groupId;
+    private Long groupId;
 
     private Date day;
 

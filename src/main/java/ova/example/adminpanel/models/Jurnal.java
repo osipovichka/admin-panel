@@ -17,10 +17,10 @@ public class Jurnal {
     private long id;
 
     @Column(name = "users_id")
-    private int userId;
+    private Long userId;
 
     @Column(name = "lesson_id")
-    private int lessonId;
+    private Long lessonId;
 
     private boolean absent;
 

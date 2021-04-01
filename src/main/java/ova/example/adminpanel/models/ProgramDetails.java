@@ -17,7 +17,7 @@ public class ProgramDetails {
     private long id;
 
     @Column(name = "course_program_id")
-    private int courseProgramId;
+    private Long courseProgramId;
 
     @Column(name = "lesson_number")
     private int lessonNumber;

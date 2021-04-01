@@ -30,7 +30,7 @@ public class Group {
     private int duration;
 
     @Column(name = "course_program_id")
-    private int courseProgramId;
+    private Long courseProgramId;
 
     @ManyToMany(mappedBy = "groups")
     private List<User> teachers;

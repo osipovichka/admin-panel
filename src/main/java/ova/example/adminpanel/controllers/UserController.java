@@ -1,6 +1,8 @@
 package ova.example.adminpanel.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ova.example.adminpanel.models.Role;
 import ova.example.adminpanel.models.User;
@@ -43,7 +45,7 @@ public class UserController {
     @PostMapping
     public void createUser(@RequestBody User user){
         Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findById((long)1).orElseThrow());
+        roles.add(roleRepository.findById(1L).orElseThrow());
         user.setRoles(roles);
         userRepository.saveAndFlush(user);
     }
@@ -52,23 +54,13 @@ public class UserController {
      * Изменить пользователя в БД
      * @return User
      */
-    // TODO: 31.03.2021 проверить наличие id у usera, протестить без перечисления полей
     @PutMapping
-    public User updateUser(@RequestBody User userDetails){
-//        User user = userRepository.findById(userDetails.getId()).orElseThrow();
-//
-//        user.setFirstName(userDetails.getFirstName());
-//        user.setLastName(userDetails.getLastName());
-//        user.setPatronymic(userDetails.getPatronymic());
-//        user.setBirthDate(userDetails.getBirthDate());
-//        user.setEmail(userDetails.getEmail());
-//        user.setPhone(userDetails.getPhone());
-//        user.setPassword(userDetails.getPassword());
-//        user.setCityId(user.getCityId());
-
+    public ResponseEntity<User> updateUser(@RequestBody User userDetails){
+        if(userDetails.getId() == 0){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
         User updateUser = userRepository.saveAndFlush(userDetails);
-
-        return updateUser;
+        return ResponseEntity.ok(updateUser);
     }
 
     /**

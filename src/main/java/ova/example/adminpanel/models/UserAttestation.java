@@ -17,10 +17,10 @@ public class UserAttestation {
     private long id;
 
     @Column(name = "users_id")
-    private int userId;
+    private Long userId;
 
     @Column(name = "attestation_theme_id")
-    private int attestationThemeId;
+    private Long attestationThemeId;
 
     @Column(name = "theory_passed")
     private boolean theoryPassed;

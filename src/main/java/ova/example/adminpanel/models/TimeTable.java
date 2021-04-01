@@ -19,7 +19,7 @@ public class TimeTable {
     private long id;
 
     @Column(name = "group_id")
-    private int groupId;
+    private Long groupId;
 
     @Column(name = "room_number")
     private int roomNumber;

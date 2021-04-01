@@ -17,7 +17,7 @@ public class AttestationTheme {
     private long id;
 
     @Column(name = "course_id")
-    private int courseId;
+    private Long courseId;
 
     private String theme;
 }
