@@ -39,8 +39,8 @@ public class User {
     @Transient
     private String confirmPassword;
 
-//    @Column(name = "city_id")
-//    private int cityId;
+    @Column(name = "city_id")
+    private int cityId;
 
     @Column(name = "registration_date")
     private Date registrationDate;

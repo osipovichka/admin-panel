@@ -2,10 +2,14 @@ package ova.example.adminpanel.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ova.example.adminpanel.models.Role;
 import ova.example.adminpanel.models.User;
+import ova.example.adminpanel.repository.RoleRepository;
 import ova.example.adminpanel.repository.UserRepository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/user")
@@ -13,6 +17,7 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     /**
      * Возвращает список всех пользователей
@@ -37,6 +42,9 @@ public class UserController {
      */
     @PostMapping
     public void createUser(@RequestBody User user){
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findById((long)1).orElseThrow());
+        user.setRoles(roles);
         userRepository.saveAndFlush(user);
     }
 
@@ -47,18 +55,18 @@ public class UserController {
     // TODO: 31.03.2021 проверить наличие id у usera, протестить без перечисления полей
     @PutMapping
     public User updateUser(@RequestBody User userDetails){
-        User user = userRepository.findById(userDetails.getId()).orElseThrow();
+//        User user = userRepository.findById(userDetails.getId()).orElseThrow();
+//
+//        user.setFirstName(userDetails.getFirstName());
+//        user.setLastName(userDetails.getLastName());
+//        user.setPatronymic(userDetails.getPatronymic());
+//        user.setBirthDate(userDetails.getBirthDate());
+//        user.setEmail(userDetails.getEmail());
+//        user.setPhone(userDetails.getPhone());
+//        user.setPassword(userDetails.getPassword());
+//        user.setCityId(user.getCityId());
 
-        user.setFirstName(userDetails.getFirstName());
-        user.setLastName(userDetails.getLastName());
-        user.setPatronymic(userDetails.getPatronymic());
-        user.setBirthDate(userDetails.getBirthDate());
-        user.setEmail(userDetails.getEmail());
-        user.setPhone(userDetails.getPhone());
-        user.setPassword(userDetails.getPassword());
-        //user.setCityId(user.getCityId());
-
-        User updateUser = userRepository.saveAndFlush(user);
+        User updateUser = userRepository.saveAndFlush(userDetails);
 
         return updateUser;
     }
