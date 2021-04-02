@@ -16,7 +16,7 @@ public class SwaggerConfig {
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
                 .group("api")
-                .packagesToScan("ru.esphere")
+                .packagesToScan("ova.example")
                 .pathsToMatch("/api/**")
                 .build();
     }
@@ -34,12 +34,11 @@ public class SwaggerConfig {
     public OpenAPI springShopOpenAPI(final Environment env) {
         return new OpenAPI()
                 .info(new Info()
-                        .title(env.getProperty("spring.application.name", "spfl-api"))
-                        .description("Сервис проверки физических лиц")
+                        .title(env.getProperty("spring.application.name", "admin_panel"))
+                        .description("Панель администратора")
                         .contact(new Contact()
-                                .name("КОРУС Консалтинг СНГ")
-                                .email("info@esphere.ru")
-                                .url("https://www.esphere.ru"))
+                                .name("Виктория")
+                                .email("osipovichka@mail.ru"))
                 );
     }
 }

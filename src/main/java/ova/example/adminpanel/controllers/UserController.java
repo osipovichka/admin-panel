@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ova.example.adminpanel.DTO.UserDTO;
 import ova.example.adminpanel.models.Role;
 import ova.example.adminpanel.models.User;
 import ova.example.adminpanel.repository.RoleRepository;
 import ova.example.adminpanel.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,8 +28,12 @@ public class UserController {
      * @return List<User>
      */
     @GetMapping
-    public List<User> getAllUser(){
-        return userRepository.findAll();
+    public List<UserDTO> getAllUser(){
+        List<UserDTO> lUserDto = new ArrayList<>();
+        for (User us: userRepository.findAll()) {
+            lUserDto.add(UserDTO.fromModel(us));
+        }
+        return lUserDto;
     }
 
     /**
@@ -55,12 +61,18 @@ public class UserController {
      * @return User
      */
     @PutMapping
-    public ResponseEntity<User> updateUser(@RequestBody User userDetails){
+    public ResponseEntity<UserDTO> updateUser(@RequestBody User userDetails){
         if(userDetails.getId() == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-        User updateUser = userRepository.saveAndFlush(userDetails);
-        return ResponseEntity.ok(updateUser);
+
+        Set<Role> roles = new HashSet<>();
+        for (Role r: userRepository.findById(userDetails.getId()).orElseThrow().getRoles()) {
+            roles.add(r);
+            userDetails.setRoles(roles);
+        }
+        userRepository.saveAndFlush(userDetails);
+        return ResponseEntity.ok(UserDTO.fromModel(userDetails));
     }
 
     /**
