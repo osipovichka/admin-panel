@@ -10,6 +10,7 @@ import ova.example.adminpanel.models.User;
 import ova.example.adminpanel.repository.RoleRepository;
 import ova.example.adminpanel.repository.UserRepository;
 import ova.example.adminpanel.service.UserService;
+import ova.example.adminpanel.utils.RolesEnum;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,9 +39,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO createUser(User user) {
+    public UserDTO createUser(UserDTO userDto) {
+        User user = new User(userDto);
         Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findById(1L).orElseThrow());
+        roles.add(roleRepository.findById(RolesEnum.USER.getValue()).orElseThrow());
         user.setRoles(roles);
         return UserDTO.fromModel(userRepository.saveAndFlush(user));
     }

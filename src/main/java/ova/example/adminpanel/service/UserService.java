@@ -29,11 +29,11 @@ public interface UserService {
     /**
      * Записать пользователя в БД.
      *
-     * @param user пользователь.
+     * @param userDto пользователь.
      *
      * @return пользователь.
      */
-    UserDTO createUser(User user);
+    UserDTO createUser(UserDTO userDto);
 
     /**
      * Записать пользователя в БД.

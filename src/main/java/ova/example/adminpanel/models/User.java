@@ -3,9 +3,11 @@ package ova.example.adminpanel.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ova.example.adminpanel.DTO.UserDTO;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -49,7 +52,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "student_group",
@@ -71,4 +74,15 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_program_skill_id")
     )
     private Set<CourseProgramSkill> skills;
+
+    public User(UserDTO userDto) {
+        this.id = userDto.getId();
+        this.firstName = userDto.getFirstName();
+        this.lastName = userDto.getLastName();
+        this.patronymic = userDto.getPatronymic();
+        this.birthDate = userDto.getBirthDate();
+        this.email = userDto.getEmail();
+        this.phone = userDto.getPhone();
+        this.cityId = userDto.getCityId();
+    }
 }

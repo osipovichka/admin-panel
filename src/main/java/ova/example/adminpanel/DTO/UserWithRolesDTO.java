@@ -25,6 +25,7 @@ public class UserWithRolesDTO {
 
     public static UserWithRolesDTO fromModel(User user){
         UserWithRolesDTO dto = new UserWithRolesDTO();
+
         dto.setUserId(user.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());

@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ova.example.adminpanel.DTO.UserDTO;
 import ova.example.adminpanel.DTO.UserWithRolesDTO;
-import ova.example.adminpanel.models.User;
 import ova.example.adminpanel.service.impl.UserServiceImpl;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody User user){
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user){
         return ResponseEntity.ok(userServiceImpl.createUser(user));
     }
 
