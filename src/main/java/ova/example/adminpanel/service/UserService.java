@@ -1,7 +1,9 @@
 package ova.example.adminpanel.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import ova.example.adminpanel.DTO.UserDTO;
+import ova.example.adminpanel.DTO.UserWithRolesDTO;
 import ova.example.adminpanel.models.User;
 
 import java.util.List;
@@ -53,4 +55,13 @@ public interface UserService {
      * @param userId roleId пользователь с изменениями.
      */
     public void addUserRole(long userId, long roleId);
+
+    /**
+     * Получить пользователя со списком его ролей по id.
+     *
+     * @param id пользователя.
+     *
+     * @return пользователя со списком его ролей.
+     */
+    public UserWithRolesDTO getUserWithRoles(@PathVariable long id);
 }

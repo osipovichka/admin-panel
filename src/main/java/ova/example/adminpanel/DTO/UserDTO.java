@@ -33,16 +33,6 @@ public class UserDTO {
     private String phone;
     private Long cityId;
 
-    private Set<Role> roles;
-
-    @JsonProperty("studentGroup")
-    private Set<Group> group;
-
-    @JsonProperty("teacherGroup")
-    private Set<Group> groups;
-
-    private Set<CourseProgramSkill> skills;
-
     public static UserDTO fromModel(User user){
         UserDTO userDTO = new UserDTO();
 
@@ -55,26 +45,6 @@ public class UserDTO {
         userDTO.setPhone(user.getPhone());
         userDTO.setCityId(user.getCityId());
 
-//        Set<Role> roles = new HashSet<>(user.getRoles());
-//        userDTO.setRoles(roles);
-
         return userDTO;
     }
-
-//    public static User fromModelDTO(UserDTO userDto){
-//        User user = new User();
-//
-//        user.setFirstName(userDto.getFirstName());
-//        user.setLastName(userDto.getLastName());
-//        user.setPatronymic(userDto.getPatronymic());
-//        user.setBirthDate(userDto.getBirthDate());
-//        user.setEmail(userDto.getEmail());
-//        user.setPhone(userDto.getPhone());
-//        user.setCityId(userDto.getCityId());
-//
-//        Set<Role> roles = new HashSet<>(userDto.getRoles());
-//        user.setRoles(roles);
-//
-//        return user;
-//    }
 }

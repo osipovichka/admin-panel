@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ova.example.adminpanel.DTO.UserDTO;
+import ova.example.adminpanel.DTO.UserWithRolesDTO;
 import ova.example.adminpanel.models.Role;
 import ova.example.adminpanel.models.User;
 import ova.example.adminpanel.repository.RoleRepository;
@@ -54,8 +55,6 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDetails.getEmail());
         user.setPhone(userDetails.getPhone());
         user.setCityId(userDetails.getCityId());
-
-        userDetails.setRoles(user.getRoles());
         userRepository.saveAndFlush(user);
 
         return UserDTO.fromModel(user);
@@ -73,5 +72,11 @@ public class UserServiceImpl implements UserService {
         role.add(roleRepository.findById(roleId).orElseThrow());
         user.setRoles(role);
         userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public UserWithRolesDTO getUserWithRoles(long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        return UserWithRolesDTO.fromModel(user);
     }
 }

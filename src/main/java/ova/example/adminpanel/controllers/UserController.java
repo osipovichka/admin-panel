@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ova.example.adminpanel.DTO.UserDTO;
+import ova.example.adminpanel.DTO.UserWithRolesDTO;
 import ova.example.adminpanel.models.User;
 import ova.example.adminpanel.service.impl.UserServiceImpl;
 
@@ -49,5 +50,13 @@ public class UserController {
     @PostMapping("/AddUser_Role/{userId}/{roleId}")
     public void addUserRole(@PathVariable long userId, @PathVariable long roleId){
         userServiceImpl.addUserRole(userId, roleId);
+    }
+
+    @GetMapping("/User_Roles/{id}")
+    public ResponseEntity<UserWithRolesDTO> getUserWithRoles(@PathVariable long id){
+        if(id == 0){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(userServiceImpl.getUserWithRoles(id));
     }
 }
