@@ -5,16 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ova.example.adminpanel.DTO.UserDTO;
-import ova.example.adminpanel.models.Role;
 import ova.example.adminpanel.models.User;
-import ova.example.adminpanel.repository.RoleRepository;
-import ova.example.adminpanel.repository.UserRepository;
 import ova.example.adminpanel.service.impl.UserServiceImpl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/user")
@@ -25,6 +19,7 @@ public class UserController {
 
     @GetMapping
     public List<UserDTO> getAllUser(){
+
         return userServiceImpl.getAllUser();
     }
 
@@ -39,7 +34,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDTO> updateUser(@RequestBody User userDetails){
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDetails){
         if(userDetails.getId() == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
@@ -49,5 +44,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable long id){
         userServiceImpl.deleteUser(id);
+    }
+
+    @PostMapping("/AddUser_Role/{userId}/{roleId}")
+    public void addUserRole(@PathVariable long userId, @PathVariable long roleId){
+        userServiceImpl.addUserRole(userId, roleId);
     }
 }

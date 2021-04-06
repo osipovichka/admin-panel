@@ -2,8 +2,6 @@ package ova.example.adminpanel.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ova.example.adminpanel.DTO.UserDTO;
 import ova.example.adminpanel.models.Role;
@@ -47,22 +45,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateUser(User userDetails) {
-        if(userDetails.getId() == 0){
-            ResponseEntity.status(HttpStatus.BAD_REQUEST);
-        }
+    public UserDTO updateUser(UserDTO userDetails) {
+        User user = userRepository.findById(userDetails.getId()).orElseThrow();
+        user.setFirstName(userDetails.getFirstName());
+        user.setLastName(userDetails.getLastName());
+        user.setPatronymic(userDetails.getPatronymic());
+        user.setBirthDate(userDetails.getBirthDate());
+        user.setEmail(userDetails.getEmail());
+        user.setPhone(userDetails.getPhone());
+        user.setCityId(userDetails.getCityId());
 
-        Set<Role> roles = new HashSet<>();
-        for (Role r: userRepository.findById(userDetails.getId()).orElseThrow().getRoles()) {
-            roles.add(r);
-            userDetails.setRoles(roles);
-        }
-        userRepository.saveAndFlush(userDetails);
-        return UserDTO.fromModel(userDetails);
+        userDetails.setRoles(user.getRoles());
+        userRepository.saveAndFlush(user);
+
+        return UserDTO.fromModel(user);
     }
 
     @Override
     public void deleteUser(long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void addUserRole(long userId, long roleId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        Set<Role> role = user.getRoles();
+        role.add(roleRepository.findById(roleId).orElseThrow());
+        user.setRoles(role);
+        userRepository.saveAndFlush(user);
     }
 }

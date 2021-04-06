@@ -11,6 +11,7 @@ import ova.example.adminpanel.models.Group;
 import ova.example.adminpanel.models.Role;
 import ova.example.adminpanel.models.User;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class UserDTO {
     private String lastName;
     private String patronymic;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date birthDate;
     private String email;
     private String phone;
@@ -54,12 +55,26 @@ public class UserDTO {
         userDTO.setPhone(user.getPhone());
         userDTO.setCityId(user.getCityId());
 
-        Set<Role> roles = new HashSet<>();
-        for (Role r: user.getRoles()) {
-            roles.add(r);
-            user.setRoles(roles);
-        }
+//        Set<Role> roles = new HashSet<>(user.getRoles());
+//        userDTO.setRoles(roles);
 
         return userDTO;
     }
+
+//    public static User fromModelDTO(UserDTO userDto){
+//        User user = new User();
+//
+//        user.setFirstName(userDto.getFirstName());
+//        user.setLastName(userDto.getLastName());
+//        user.setPatronymic(userDto.getPatronymic());
+//        user.setBirthDate(userDto.getBirthDate());
+//        user.setEmail(userDto.getEmail());
+//        user.setPhone(userDto.getPhone());
+//        user.setCityId(userDto.getCityId());
+//
+//        Set<Role> roles = new HashSet<>(userDto.getRoles());
+//        user.setRoles(roles);
+//
+//        return user;
+//    }
 }

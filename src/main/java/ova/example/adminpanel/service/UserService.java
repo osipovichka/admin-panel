@@ -1,5 +1,6 @@
 package ova.example.adminpanel.service;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import ova.example.adminpanel.DTO.UserDTO;
 import ova.example.adminpanel.models.User;
 
@@ -39,10 +40,17 @@ public interface UserService {
      *
      * @return пользователь.
      */
-    UserDTO updateUser(User userDetails);
+    UserDTO updateUser(UserDTO userDetails);
 
     /**
      * Удаление пользователя из БД
      */
     void deleteUser(long id);
+
+    /**
+     * Добавить пользователю роль.
+     *
+     * @param userId roleId пользователь с изменениями.
+     */
+    public void addUserRole(long userId, long roleId);
 }
