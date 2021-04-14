@@ -48,4 +48,20 @@ class UserServiceImplTest {
 
     }
 
+    @Test
+    void addUserRole() {
+        User user = new User();
+        long userId = 1;
+        long roleId = 1;
+
+        Mockito.when(userRepo.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(new User()));
+        Mockito.when(roleRepo.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(new Role()));
+
+        userService.addUserRole(userId, roleId);
+
+        Mockito.verify(userRepo, Mockito.times(1)).findById(userId);
+        Mockito.verify(roleRepo, Mockito.times(1)).findById(roleId);
+        //Mockito.verify(userRepo, Mockito.times(1)).saveAndFlush(user);
+    }
+
 }

@@ -63,5 +63,5 @@ public interface UserService {
      *
      * @return пользователя со списком его ролей.
      */
-    public UserWithRolesDTO getUserWithRoles(@PathVariable long id);
+    public UserWithRolesDTO getUserWithRoles(long id);
 }

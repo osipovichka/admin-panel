@@ -3,7 +3,7 @@
 
 create table if not exists city
 (
-    id serial NOT NULL PRIMARY KEY,
+    id int NOT NULL PRIMARY KEY,
     name varchar(30) not null
 );
 
@@ -23,7 +23,7 @@ create table if not exists users
 
 create table if not exists role
 (
-    id serial NOT NULL PRIMARY KEY,
+    id int NOT NULL PRIMARY KEY,
     name varchar(15) not null
 );
 
@@ -87,10 +87,10 @@ create table course_program_skill(
 );
 
 create table user_skill(
-    users_id int not null references users(id),
+    user_id int not null references users(id),
     course_program_skill_id int not null references course_program_skill(id),
 
-    unique (users_id, course_program_skill_id)
+    unique (user_id, course_program_skill_id)
 );
 
 create table attestation_theme(
@@ -125,7 +125,7 @@ create table lesson_topic(
 
 create table student_group(
     id serial NOT NULL PRIMARY KEY,
-    users_id int not null references users(id),
+    user_id int not null references users(id),
     group_id int not null references "group"(id),
     rating int
 );
