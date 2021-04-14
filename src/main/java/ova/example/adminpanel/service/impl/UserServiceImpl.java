@@ -31,12 +31,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserById(Long id) {
+    public UserDTO getUserById(long id) {
         UserDTO userDTO = null;
         try {
             userDTO = UserDTO.fromModel(userRepository.findById(id).orElseThrow());
         }catch (NoSuchElementException e){
-            log.error("Пользователь не найден в БД {}", e.getMessage(), e);
+            log.error("Пользователь с id - {} не найден в БД {}", id, e.getMessage(), e);
         }
         return userDTO;
     }

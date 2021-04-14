@@ -18,14 +18,14 @@ public class UserController {
     private final UserServiceImpl userServiceImpl;
 
     @GetMapping
-    public List<UserDTO> getAllUser(){
+    public ResponseEntity<List<UserDTO>> getAllUser(){
 
-        return userServiceImpl.getAllUser();
+        return ResponseEntity.ok(userServiceImpl.getAllUser());
     }
 
     @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable long id){
-        return userServiceImpl.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable long id){
+        return ResponseEntity.ok(userServiceImpl.getUserById(id));
     }
 
     @PostMapping
@@ -42,13 +42,15 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable long id){
+    public ResponseEntity deleteUser(@PathVariable long id){
         userServiceImpl.deleteUser(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/AddUser_Role/{userId}/{roleId}")
-    public void addUserRole(@PathVariable long userId, @PathVariable long roleId){
+    public ResponseEntity addUserRole(@PathVariable long userId, @PathVariable long roleId){
         userServiceImpl.addUserRole(userId, roleId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/User_Roles/{id}")
