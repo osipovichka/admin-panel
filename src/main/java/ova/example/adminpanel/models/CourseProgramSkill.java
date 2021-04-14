@@ -14,11 +14,11 @@ import java.util.List;
 @Table(name="course_program_skill")
 public class CourseProgramSkill {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "course_program_id")
-    private int courseProgramId;
+    private Long courseProgramId;
 
     private String name;
 

@@ -14,11 +14,11 @@ import java.util.List;
 @Table(name="theme_details")
 public class ThemeDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "program_details_id")
-    private int programDetailsId;
+    private Long programDetailsId;
 
     private String topic;
 

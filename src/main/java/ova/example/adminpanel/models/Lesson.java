@@ -14,12 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class Lesson {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
     @Column(name = "group_id")
-    private int groupId;
+    private Long groupId;
 
     private Date day;
 

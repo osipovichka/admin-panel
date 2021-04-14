@@ -13,11 +13,11 @@ import javax.persistence.*;
 @Table(name = "attestation_theme")
 public class AttestationTheme {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "course_id")
-    private int courseId;
+    private Long courseId;
 
     private String theme;
 }

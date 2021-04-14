@@ -12,15 +12,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Jurnal {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
     @Column(name = "users_id")
-    private int userId;
+    private Long userId;
 
     @Column(name = "lesson_id")
-    private int lessonId;
+    private Long lessonId;
 
     private boolean absent;
 

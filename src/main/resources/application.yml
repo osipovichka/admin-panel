@@ -2,6 +2,9 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: AdminPanel
+
   datasource:
     url: jdbc:postgresql://localhost/admin_panel
     username: postgres
@@ -10,3 +13,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    show-sql: true
+
+#logging:
+  #level:
+    #org.springframework.web: ERROR
+    #eva.examle: DEBAG
+  #pattern:
+    #console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
