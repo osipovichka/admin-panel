@@ -3,7 +3,7 @@
 
 create table teacher_group(
     user_id int not null references users(id),
-    group_id int not null references "group"(id),
+    group_id int not null references groups(id),
 
     unique (user_id, group_id)
 );

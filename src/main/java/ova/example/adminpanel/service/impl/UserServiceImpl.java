@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         try {
             userDTO = UserDTO.fromModel(userRepository.findById(id).orElseThrow());
         }catch (NoSuchElementException e){
-            log.error("Пользователь не найден в БД {}", e.getMessage(), e);
+            log.error("Пользователь с id - {} не найден в БД {}", id, e.getMessage(), e);
         }
         return userDTO;
     }
@@ -52,9 +52,9 @@ public class UserServiceImpl implements UserService {
             userDTO = UserDTO.fromModel(userRepository.saveAndFlush(user));
 
         } catch (NoSuchElementException e){
-            log.error("В БД нет данной роли {}", e.getMessage(), e);
+            log.error("Роль с id - {} не найдены в БД {}", userDto.getId(), e.getMessage(), e);
         }catch (Exception e){
-            log.error("Пользователь не записан в БД {}", e.getMessage(), e);
+            log.error("Пользователь не создан {}", userDto.getId(), e.getMessage(), e);
         }
         return userDTO;
     }
@@ -73,9 +73,9 @@ public class UserServiceImpl implements UserService {
             user.setCityId(userDetails.getCityId());
             userRepository.saveAndFlush(user);
         } catch (NoSuchElementException e){
-            log.error("Пользователь не найден в БД {}", e.getMessage(), e);
+            log.error("Пользователь c id - {} не найден в БД {}", userDetails.getId(), e.getMessage(), e);
         } catch (Exception e){
-            log.error("Пользователь не обновлен в БД {}", e.getMessage(), e);
+            log.error("Пользователь c id - {} не обновлен в БД {}", userDetails.getId(), e.getMessage(), e);
         }
         return UserDTO.fromModel(user);
     }
@@ -91,27 +91,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUserRole(long userId, long roleId) {
-        try {
-            User user = userRepository.findById(userId).orElseThrow();
-            Set<Role> role = user.getRoles();
-            role.add(roleRepository.findById(roleId).orElseThrow());
-            user.setRoles(role);
-            userRepository.saveAndFlush(user);
-        } catch (NoSuchElementException e){
-            log.error("Пользователь или роль не найдены в БД {}", e.getMessage(), e);
-        } catch (Exception e){
-            log.error("Пользователь не обновлен в БД {}", e.getMessage(), e);
+        Optional<Role> opRole = roleRepository.findById(roleId);
+        if (opRole.isEmpty()){
+            log.error("Роль с id - {} не найдены в БД", roleId);
         }
-
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isEmpty()){
+            log.error("Пользователь с id - {} не найдены в БД", userId);
+        }
+        User user = optionalUser.get();
+        Set<Role> role = user.getRoles();
+        role.add(opRole.get());
+        user.setRoles(role);
+        userRepository.saveAndFlush(user);
     }
 
     @Override
     public UserWithRolesDTO getUserWithRoles(long id) {
+//        Optional<User> opUser = userRepository.findById(id);
+//        opUser.ifPresentOrElse(user -> UserWithRolesDTO.fromModel(user),
+//                () -> {
+//            log.error("Пользователь с id - {} не найдены в БД {}", id);
+//        });
         User user = null;
         try {
             user = userRepository.findById(id).orElseThrow();
         } catch (NoSuchElementException e){
-            log.error("Пользователь не найден в БД {}", e.getMessage(), e);
+            log.error("Пользователь с id - {} не найдены в БД {}", id, e.getMessage(), e);
         }
         return UserWithRolesDTO.fromModel(user);
     }

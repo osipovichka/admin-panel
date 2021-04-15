@@ -48,13 +48,11 @@ create table course_program(
     title varchar(50) not null
 );
 
-create table "group"(
+create table groups(
     id serial NOT NULL PRIMARY KEY,
     start_date date not null,
     end_date date not null,
-    time_start time(0) not null,
-    duration int not null,
-    course_program_id int not null references course_program(id)
+    course_program_id int references course_program(id)
 );
 
 create table news(
@@ -64,7 +62,7 @@ create table news(
     publication_date date not null,
     author_id int not null references users(id),
     recipient_id int references users(id),
-    group_id int references "group"(id)
+    group_id int references groups(id)
 );
 
 create table program_details(
@@ -109,7 +107,7 @@ create table user_attestation(
 
 create table lesson(
     id serial NOT NULL PRIMARY KEY,
-    group_id int not null references "group"(id),
+    group_id int not null references groups(id),
     day date not null,
     home_task varchar(200),
     read varchar(100),
@@ -126,13 +124,13 @@ create table lesson_topic(
 create table student_group(
     id serial NOT NULL PRIMARY KEY,
     user_id int not null references users(id),
-    group_id int not null references "group"(id),
+    group_id int not null references groups(id),
     rating int
 );
 
 create table time_table(
     id serial NOT NULL PRIMARY KEY,
-    group_id int not null references "group"(id),
+    group_id int not null references groups(id),
     room_number int not null,
     day date not null,
     time_start time(0) not null,

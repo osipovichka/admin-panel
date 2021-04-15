@@ -1,10 +1,7 @@
 package ova.example.adminpanel.service;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import ova.example.adminpanel.DTO.UserDTO;
 import ova.example.adminpanel.DTO.UserWithRolesDTO;
-import ova.example.adminpanel.models.User;
 
 import java.util.List;
 
@@ -36,7 +33,7 @@ public interface UserService {
     UserDTO createUser(UserDTO userDto);
 
     /**
-     * Записать пользователя в БД.
+     * Обновить пользователя в БД.
      *
      * @param userDetails пользователь с изменениями.
      *

@@ -18,14 +18,17 @@ public class UserController {
     private final UserServiceImpl userServiceImpl;
 
     @GetMapping
-    public List<UserDTO> getAllUser(){
+    public ResponseEntity<List<UserDTO>> getAllUser(){
 
-        return userServiceImpl.getAllUser();
+        return ResponseEntity.ok(userServiceImpl.getAllUser());
     }
 
     @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable long id){
-        return userServiceImpl.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
+        if(id == null){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(userServiceImpl.getUserById(id));
     }
 
     @PostMapping
@@ -42,17 +45,25 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable long id){
+    public ResponseEntity deleteUser(@PathVariable Long id){
+        if(id == 0){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
         userServiceImpl.deleteUser(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/AddUser_Role/{userId}/{roleId}")
-    public void addUserRole(@PathVariable long userId, @PathVariable long roleId){
+    public ResponseEntity addUserRole(@PathVariable Long userId, @PathVariable Long roleId){
+        if(userId == 0 || roleId == 0){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
         userServiceImpl.addUserRole(userId, roleId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/User_Roles/{id}")
-    public ResponseEntity<UserWithRolesDTO> getUserWithRoles(@PathVariable long id){
+    public ResponseEntity<UserWithRolesDTO> getUserWithRoles(@PathVariable Long id){
         if(id == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }

@@ -11,7 +11,7 @@ import ova.example.adminpanel.models.Role;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class RoleDTO {
-    private long id;
+    private Long id;
     private String title;
 
     public static RoleDTO fromModel(Role role) {
