@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class UserAttestation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "users_id")
     private Long userId;

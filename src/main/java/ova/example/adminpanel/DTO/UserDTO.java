@@ -22,7 +22,7 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserDTO {
 
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String patronymic;

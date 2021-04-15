@@ -1,10 +1,9 @@
 package ova.example.adminpanel.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ova.example.adminpanel.DTO.GroupDTO;
 import ova.example.adminpanel.service.impl.GroupServiceImpl;
 
@@ -24,6 +23,31 @@ public class GroupController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GroupDTO> getGroupById(long id){
+        if(id == 0){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(groupService.getGroupById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<GroupDTO> createGroup(GroupDTO groupDTO){
+        return ResponseEntity.ok(groupService.createGroup(groupDTO));
+    }
+
+    @PutMapping
+    public ResponseEntity<GroupDTO> updateGroup(GroupDTO groupDetails){
+        if(groupDetails.getId() == 0){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(groupService.updateGroup(groupDetails));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteGroup(@PathVariable long id){
+        if(id == 0){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST);
+        }
+        groupService.deleteGroup(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

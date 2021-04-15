@@ -11,6 +11,7 @@ import ova.example.adminpanel.service.GroupService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -41,16 +42,26 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public GroupDTO createGroup(GroupDTO groupDTO) {
-        return null;
+        Group group = new Group(groupDTO);
+        GroupDTO groupDto = GroupDTO.fromModel(groupRepo.saveAndFlush(group));
+        return groupDto;
     }
 
     @Override
     public GroupDTO updateGroup(GroupDTO groupDetails) {
-        return null;
+        Optional<Group> opGroup = groupRepo.findById(groupDetails.getId());
+        if (opGroup.isEmpty()){
+            log.error("Группа с id - {} не найдена", groupDetails.getId());
+        }
+        Group group = opGroup.get();
+        group.setStartDate(groupDetails.getStartDate());
+        group.setEndDate(groupDetails.getEndDate());
+
+        return GroupDTO.fromModel(group);
     }
 
     @Override
     public void deleteGroup(long id) {
-
+        groupRepo.deleteById(id);
     }
 }

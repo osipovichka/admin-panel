@@ -17,7 +17,7 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserWithRolesDTO {
     @JsonProperty("id")
-    private long userId;
+    private Long userId;
     private String firstName;
     private String lastName;
     private String patronymic;

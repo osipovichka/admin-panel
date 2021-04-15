@@ -9,9 +9,9 @@ public enum RolesEnum {
     TEACHER(3l),
     STUDENT(4l);
 
-    private final long value;
+    private final Long value;
 
-    RolesEnum(long value) {
+    RolesEnum(Long value) {
         this.value = value;
     }
 }

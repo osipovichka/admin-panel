@@ -21,7 +21,7 @@ public interface UserService {
      *
      * @return пользователь.
      */
-    UserDTO getUserById(long id);
+    UserDTO getUserById(Long id);
 
     /**
      * Записать пользователя в БД.

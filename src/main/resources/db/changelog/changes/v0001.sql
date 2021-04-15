@@ -52,9 +52,7 @@ create table groups(
     id serial NOT NULL PRIMARY KEY,
     start_date date not null,
     end_date date not null,
-    time_start time(0) not null,
-    duration int not null,
-    course_program_id int not null references course_program(id)
+    course_program_id int references course_program(id)
 );
 
 create table news(
