@@ -56,6 +56,7 @@ public class GroupServiceImpl implements GroupService {
         Group group = opGroup.get();
         group.setStartDate(groupDetails.getStartDate());
         group.setEndDate(groupDetails.getEndDate());
+        groupRepo.saveAndFlush(group);
 
         return GroupDTO.fromModel(group);
     }

@@ -36,8 +36,8 @@ public class Group {
     private List<User> students;
 
     public Group(GroupDTO groupDTO) {
-        this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.id = groupDTO.getId();
+        this.startDate = groupDTO.getStartDate();
+        this.endDate = groupDTO.getEndDate();
     }
 }
