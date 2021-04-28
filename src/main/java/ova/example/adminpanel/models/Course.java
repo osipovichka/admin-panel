@@ -5,11 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ova.example.adminpanel.DTO.CourseDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -23,6 +22,9 @@ public class Course {
     private String name;
     private String description;
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CourseProgram> coursePrograms = new HashSet<>();
 
     public Course(CourseDTO courseDTO) {
         this.id = courseDTO.getId();
