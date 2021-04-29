@@ -14,12 +14,14 @@ public class ProgramDetailsDTO {
     private long id;
     private int lessonNumber;
     private String lessonTheme;
+    private Long courseProgramId;
 
     public static ProgramDetailsDTO fromModel(ProgramDetails programDetails){
         ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO();
         programDetailsDTO.setId(programDetails.getId());
         programDetailsDTO.setLessonNumber(programDetails.getLessonNumber());
         programDetailsDTO.setLessonTheme(programDetails.getLessonTheme());
+        programDetailsDTO.setCourseProgramId(programDetails.getCourseProgram().getId());
 
         return programDetailsDTO;
     }

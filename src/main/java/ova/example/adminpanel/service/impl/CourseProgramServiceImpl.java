@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ova.example.adminpanel.DTO.CourseProgramDTO;
+import ova.example.adminpanel.models.Course;
 import ova.example.adminpanel.models.CourseProgram;
 import ova.example.adminpanel.repository.CourseProgramRepository;
+import ova.example.adminpanel.repository.CourseRepository;
 import ova.example.adminpanel.service.CourseProgramService;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CourseProgramServiceImpl implements CourseProgramService {
     private final CourseProgramRepository courseProgramRepo;
+    private final CourseRepository courseRepo;
 
     @Override
     public List<CourseProgramDTO> getAllCourseProgram() {
@@ -39,6 +42,12 @@ public class CourseProgramServiceImpl implements CourseProgramService {
     @Override
     public CourseProgramDTO createCourseProgram(CourseProgramDTO courseProgramDTO) {
         CourseProgram courseProgram = new CourseProgram(courseProgramDTO);
+        Optional<Course> courseOptional = courseRepo.findById(courseProgramDTO.getCourseId());
+        if(courseOptional.isEmpty()){
+            log.error("Курса с id {} для программы {} не существует", courseProgramDTO.getCourseId(), courseProgramDTO.getTitle());
+        }
+        Course course = courseOptional.get();
+        courseProgram.setCourse(course);
         CourseProgramDTO courseProgDTO = CourseProgramDTO.fromModel(courseProgramRepo.saveAndFlush(courseProgram));
         return courseProgDTO;
     }

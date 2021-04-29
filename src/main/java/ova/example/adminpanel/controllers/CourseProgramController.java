@@ -5,13 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ova.example.adminpanel.DTO.CourseProgramDTO;
-import ova.example.adminpanel.DTO.GroupDTO;
 import ova.example.adminpanel.service.impl.CourseProgramServiceImpl;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/courseProgram")
+@RequestMapping("/api/course_program")
 @RequiredArgsConstructor
 public class CourseProgramController {
     private final CourseProgramServiceImpl courseProgramService;
