@@ -7,7 +7,9 @@ import ova.example.adminpanel.DTO.CourseDTO;
 import ova.example.adminpanel.DTO.CourseProgramDTO;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -27,6 +29,9 @@ public class CourseProgram {
     private boolean isActual;
 
     private String title;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProgramDetails> programDetails = new HashSet<>();
 
     public CourseProgram(CourseProgramDTO courseProgramDTO) {
         this.id = courseProgramDTO.getId();
