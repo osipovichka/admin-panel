@@ -50,11 +50,9 @@ public class ProgramDetailsServiceImpl implements ProgramDetailsService {
         if(courseProgramOptional.isEmpty()){
             log.error("Программа курса с id {} не существует", programDetailsDTO.getCourseProgramId());
         }
-        CourseProgram courseProgram = courseProgramOptional.get();
-        programDetails.setCourseProgram(courseProgram);
-        ProgramDetailsDTO programDetailsDto = ProgramDetailsDTO.fromModel(programDetailsRepo.saveAndFlush(programDetails));
+        programDetails.setCourseProgram(courseProgramOptional.get());
 
-        return programDetailsDto;
+        return ProgramDetailsDTO.fromModel(programDetailsRepo.saveAndFlush(programDetails));
     }
 
     @Override

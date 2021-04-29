@@ -20,7 +20,7 @@ public interface ThemeDetailsService {
      *
      * @return ThemeDetailsDTO
      */
-    ProgramDetailsDTO getThemeDetailsById(Long id);
+    ThemeDetailsDTO getThemeDetailsById(Long id);
 
     /**
      * Записать тему в БД
@@ -29,7 +29,7 @@ public interface ThemeDetailsService {
      *
      * @return ThemeDetailsDTO созданная тема
      */
-    ThemeDetailsDTO createThemeDetailsDTO(ThemeDetailsDTO themeDetailsDTO);
+    ThemeDetailsDTO createThemeDetails(ThemeDetailsDTO themeDetailsDTO);
 
     /**
      * Редактировать существующую тему
@@ -38,7 +38,7 @@ public interface ThemeDetailsService {
      *
      * @return ThemeDetailsDTO измененная тема
      */
-    ThemeDetailsDTO updateThemeDetailsDTO(ThemeDetailsDTO details);
+    ThemeDetailsDTO updateThemeDetails(ThemeDetailsDTO details);
 
     /**
      * удалить модуль программы курса
@@ -46,6 +46,6 @@ public interface ThemeDetailsService {
      * @param id модуля программы курса
      *
      */
-    void deleteThemeDetailsDTO(Long id);
+    void deleteThemeDetails(Long id);
     // TODO: 29.04.2021 отредоктировать описание методов
 }
