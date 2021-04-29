@@ -3,6 +3,7 @@ package ova.example.adminpanel.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ova.example.adminpanel.DTO.ThemeDetailsDTO;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,11 +18,17 @@ public class ThemeDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "program_details_id")
-    private Long programDetailsId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "program_details_id")
+    private ProgramDetails programDetails;
 
     private String topic;
 
     @ManyToMany(mappedBy = "themeDetails")
     private List<Lesson> lessons;
+
+    public ThemeDetails(ThemeDetailsDTO themeDetailsDTO){
+        this.id = themeDetailsDTO.getId();
+        this.topic = themeDetailsDTO.getTopic();
+    }
 }

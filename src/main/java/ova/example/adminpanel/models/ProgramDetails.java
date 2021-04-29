@@ -3,10 +3,11 @@ package ova.example.adminpanel.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ova.example.adminpanel.DTO.CourseProgramDTO;
 import ova.example.adminpanel.DTO.ProgramDetailsDTO;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -27,6 +28,9 @@ public class ProgramDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_program_id")
     private CourseProgram courseProgram;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ThemeDetails> themeDetails = new HashSet<>();
 
     public ProgramDetails(ProgramDetailsDTO programDetailsDTO) {
         this.id = programDetailsDTO.getId();
