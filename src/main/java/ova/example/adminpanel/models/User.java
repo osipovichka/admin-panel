@@ -75,6 +75,9 @@ public class User {
     )
     private Set<CourseProgramSkill> skills;
 
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Journal> journals = new HashSet<>();
+
     public User(UserDTO userDto) {
         this.id = userDto.getId();
         this.firstName = userDto.getFirstName();
