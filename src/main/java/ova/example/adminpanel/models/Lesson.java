@@ -3,6 +3,7 @@ package ova.example.adminpanel.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ova.example.adminpanel.DTO.LessonDTO;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,10 +17,11 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
-    @Column(name = "group_id")
-    private Long groupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     private Date day;
 
@@ -35,4 +37,12 @@ public class Lesson {
             inverseJoinColumns = @JoinColumn(name = "theme_details_id")
     )
     private List<ThemeDetails> themeDetails;
+
+    public Lesson(LessonDTO lessonDTO){
+        this.id = lessonDTO.getId();
+        this.day = lessonDTO.getDay();
+        this.homeTask = lessonDTO.getHomeTask();
+        this.read = lessonDTO.getRead();
+        this.videos = lessonDTO.getVideos();
+    }
 }

@@ -7,7 +7,9 @@ import ova.example.adminpanel.DTO.GroupDTO;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -34,6 +36,9 @@ public class Group {
 
     @ManyToMany(mappedBy = "group")
     private List<User> students;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Lesson> lesson = new HashSet<>();
 
     public Group(GroupDTO groupDTO) {
         this.id = groupDTO.getId();
