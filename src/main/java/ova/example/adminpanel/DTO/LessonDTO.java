@@ -23,7 +23,7 @@ public class LessonDTO {
     private String read;
     private String videos;
 
-    private static LessonDTO fromModel(Lesson lesson){
+    public static LessonDTO fromModel(Lesson lesson){
         LessonDTO lessonDTO = new LessonDTO();
         lessonDTO.setId(lesson.getId());
         lessonDTO.setGroupId(lesson.getGroup().getId());
