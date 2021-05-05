@@ -22,7 +22,7 @@ public class LessonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LessonDTO> getLessonById(long id){
+    public ResponseEntity<LessonDTO> getLessonById(@PathVariable long id){
         if(id == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
@@ -30,12 +30,12 @@ public class LessonController {
     }
 
     @PostMapping
-    public ResponseEntity<LessonDTO> createLesson(LessonDTO lessonDTO){
+    public ResponseEntity<LessonDTO> createLesson(@RequestBody LessonDTO lessonDTO){
         return ResponseEntity.ok(lessonService.createLesson(lessonDTO));
     }
 
     @PutMapping
-    public ResponseEntity<LessonDTO> updateLesson(LessonDTO details){
+    public ResponseEntity<LessonDTO> updateLesson(@RequestBody LessonDTO details){
         if(details.getId() == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }

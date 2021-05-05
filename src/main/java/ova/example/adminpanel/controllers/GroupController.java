@@ -22,7 +22,7 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GroupDTO> getGroupById(long id){
+    public ResponseEntity<GroupDTO> getGroupById(@PathVariable long id){
         if(id == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
@@ -30,12 +30,12 @@ public class GroupController {
     }
 
     @PostMapping
-    public ResponseEntity<GroupDTO> createGroup(GroupDTO groupDTO){
+    public ResponseEntity<GroupDTO> createGroup(@RequestBody GroupDTO groupDTO){
         return ResponseEntity.ok(groupService.createGroup(groupDTO));
     }
 
     @PutMapping
-    public ResponseEntity<GroupDTO> updateGroup(GroupDTO groupDetails){
+    public ResponseEntity<GroupDTO> updateGroup(@RequestBody GroupDTO groupDetails){
         if(groupDetails.getId() == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }

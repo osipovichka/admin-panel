@@ -43,6 +43,9 @@ public class Group {
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TimeTable> timeTables = new HashSet<>();
 
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<New> news = new HashSet<>();
+
     public Group(GroupDTO groupDTO) {
         this.id = groupDTO.getId();
         this.startDate = groupDTO.getStartDate();

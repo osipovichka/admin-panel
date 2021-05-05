@@ -78,6 +78,9 @@ public class User {
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Journal> journals = new HashSet<>();
 
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<New> news = new HashSet<>();
+
     public User(UserDTO userDto) {
         this.id = userDto.getId();
         this.firstName = userDto.getFirstName();

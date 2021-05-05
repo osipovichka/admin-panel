@@ -21,7 +21,7 @@ public class JournalController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JournalDTO> getJournalById(long id){
+    public ResponseEntity<JournalDTO> getJournalById(@PathVariable long id){
         if(id == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
@@ -29,12 +29,12 @@ public class JournalController {
     }
 
     @PostMapping
-    public ResponseEntity<JournalDTO> createJournal(JournalDTO journalDTO){
+    public ResponseEntity<JournalDTO> createJournal(@RequestBody JournalDTO journalDTO){
         return ResponseEntity.ok(journalService.createJournal(journalDTO));
     }
 
     @PutMapping
-    public ResponseEntity<JournalDTO> updateJournal(JournalDTO details){
+    public ResponseEntity<JournalDTO> updateJournal(@RequestBody JournalDTO details){
         if(details.getId() == 0){
             ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
