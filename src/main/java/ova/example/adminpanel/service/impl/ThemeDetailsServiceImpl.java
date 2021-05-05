@@ -3,7 +3,6 @@ package ova.example.adminpanel.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ova.example.adminpanel.DTO.ProgramDetailsDTO;
 import ova.example.adminpanel.DTO.ThemeDetailsDTO;
 import ova.example.adminpanel.models.ProgramDetails;
 import ova.example.adminpanel.models.ThemeDetails;

@@ -1,6 +1,5 @@
 package ova.example.adminpanel.service;
 
-import ova.example.adminpanel.DTO.ProgramDetailsDTO;
 import ova.example.adminpanel.DTO.ThemeDetailsDTO;
 
 import java.util.List;
