@@ -26,6 +26,9 @@ public class Course {
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CourseProgram> coursePrograms = new HashSet<>();
 
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AttestationTheme> attestationThemes = new HashSet<>();
+
     public Course(CourseDTO courseDTO) {
         this.id = courseDTO.getId();
         this.name = courseDTO.getName();

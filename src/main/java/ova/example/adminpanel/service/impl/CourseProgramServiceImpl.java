@@ -48,8 +48,8 @@ public class CourseProgramServiceImpl implements CourseProgramService {
         }
         Course course = courseOptional.get();
         courseProgram.setCourse(course);
-        CourseProgramDTO courseProgDTO = CourseProgramDTO.fromModel(courseProgramRepo.saveAndFlush(courseProgram));
-        return courseProgDTO;
+
+        return CourseProgramDTO.fromModel(courseProgramRepo.saveAndFlush(courseProgram));
     }
 
     @Override
