@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import ova.example.adminpanel.DTO.AttestationThemeDTO;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,6 +24,9 @@ public class AttestationTheme {
     private Course course;
 
     private String theme;
+
+    @OneToMany(mappedBy = "attestationTheme", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserAttestation> userAttestations = new HashSet<>();
 
     public AttestationTheme(AttestationThemeDTO attestationThemeDTO){
         this.id = attestationThemeDTO.getId();

@@ -30,7 +30,7 @@ public class CourseProgram {
 
     private String title;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "courseProgram", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProgramDetails> programDetails = new HashSet<>();
 
     public CourseProgram(CourseProgramDTO courseProgramDTO) {

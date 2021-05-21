@@ -23,10 +23,10 @@ public class Course {
     private String description;
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CourseProgram> coursePrograms = new HashSet<>();
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AttestationTheme> attestationThemes = new HashSet<>();
 
     public Course(CourseDTO courseDTO) {

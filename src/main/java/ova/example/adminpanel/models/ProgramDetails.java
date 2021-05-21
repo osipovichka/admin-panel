@@ -29,7 +29,7 @@ public class ProgramDetails {
     @JoinColumn(name = "course_program_id")
     private CourseProgram courseProgram;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "programDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ThemeDetails> themeDetails = new HashSet<>();
 
     public ProgramDetails(ProgramDetailsDTO programDetailsDTO) {

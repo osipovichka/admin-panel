@@ -3,6 +3,7 @@ package ova.example.adminpanel.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ova.example.adminpanel.DTO.UserAttestationDTO;
 
 import javax.persistence.*;
 
@@ -16,15 +17,23 @@ public class UserAttestation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "users_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
+    private User user;
 
-    @Column(name = "attestation_theme_id")
-    private Long attestationThemeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attestation_theme_id")
+    private AttestationTheme attestationTheme;
 
     @Column(name = "theory_passed")
     private boolean theoryPassed;
 
     @Column(name = "practice_passed")
     private boolean practicePassed;
+
+    public UserAttestation(UserAttestationDTO userAttestationDTO){
+        this.theoryPassed = userAttestationDTO.isTheoryPassed();
+        this.practicePassed = userAttestationDTO.isPracticePassed();
+    }
+
 }
