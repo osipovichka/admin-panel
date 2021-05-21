@@ -33,6 +33,9 @@ public class CourseProgram {
     @OneToMany(mappedBy = "courseProgram", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProgramDetails> programDetails = new HashSet<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private CourseProgramSkill courseProgramSkill;
+
     public CourseProgram(CourseProgramDTO courseProgramDTO) {
         this.id = courseProgramDTO.getId();
         this.isActual = courseProgramDTO.isActual();

@@ -32,6 +32,7 @@ public class UserAttestation {
     private boolean practicePassed;
 
     public UserAttestation(UserAttestationDTO userAttestationDTO){
+        this.id = userAttestationDTO.getId();
         this.theoryPassed = userAttestationDTO.isTheoryPassed();
         this.practicePassed = userAttestationDTO.isPracticePassed();
     }

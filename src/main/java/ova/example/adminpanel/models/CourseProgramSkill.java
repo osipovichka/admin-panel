@@ -3,6 +3,8 @@ package ova.example.adminpanel.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ova.example.adminpanel.DTO.CourseProgramSkillDTO;
+import ova.example.adminpanel.service.CourseProgramService;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,11 +19,17 @@ public class CourseProgramSkill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "course_program_id")
-    private Long courseProgramId;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "course_program_id")
+    private CourseProgram courseProgram;
 
     private String name;
 
     @ManyToMany(mappedBy = "skills")
     private List<User> Student;
+
+    public CourseProgramSkill(CourseProgramSkillDTO courseProgramSkillDTO){
+        this.id = courseProgramSkillDTO.getId();
+        this.name = courseProgramSkillDTO.getName();
+    }
 }
