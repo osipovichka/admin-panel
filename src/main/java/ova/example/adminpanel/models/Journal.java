@@ -40,6 +40,4 @@ public class Journal {
         this.absentReason = journalDTO.getAbsentReason();
         this.feadback = journalDTO.getFeadback();
     }
-
-    // TODO: 30.04.2021 разобраться со связью lessonId
 }

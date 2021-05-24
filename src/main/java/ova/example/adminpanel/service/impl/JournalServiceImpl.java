@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JournalServiceImpl implements JournalService {
     private final JournalRepository journalRepo;
-    private final UserRepository userRepo;
+    private final UserServiceImpl userService;
 
     @Override
     public List<JournalDTO> getAllJournal() {
@@ -43,11 +43,8 @@ public class JournalServiceImpl implements JournalService {
     @Override
     public JournalDTO createJournal(JournalDTO journalDTO) {
         Journal journal = new Journal(journalDTO);
-        Optional<User> userOptional = userRepo.findById(journalDTO.getUserId());
-        if(userOptional.isEmpty()){
-            log.error("Пользователь с id {} не существует", journalDTO.getUserId());
-        }
-        journal.setUser(userOptional.get());
+        User user = new User(userService.getUserById(journalDTO.getUserId()));
+        journal.setUser(user);
 
         return JournalDTO.fromModel(journalRepo.saveAndFlush(journal));
     }

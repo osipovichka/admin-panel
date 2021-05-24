@@ -20,7 +20,7 @@ import java.util.Optional;
 public class TimeTableServiceImpl implements TimeTableService {
 
     private final TimeTableRepository timeTableRepo;
-    private final GroupRepository groupRepo;
+    private final GroupServiceImpl groupService;
 
     @Override
     public List<TimeTableDTO> getAllTimeTable() {
@@ -44,11 +44,8 @@ public class TimeTableServiceImpl implements TimeTableService {
     @Override
     public TimeTableDTO createTimeTable(TimeTableDTO timeTableDTO) {
         TimeTable timeTable = new TimeTable(timeTableDTO);
-        Optional<Group> optionalGroup = groupRepo.findById(timeTableDTO.getGroupId());
-        if(optionalGroup.isEmpty()){
-            log.error("Группа с id - {} не найдена", timeTableDTO.getGroupId());
-        }
-        timeTable.setGroup(optionalGroup.get());
+        Group group = new Group(groupService.getGroupById(timeTableDTO.getGroupId()));
+        timeTable.setGroup(group);
         return TimeTableDTO.fromModel(timeTableRepo.saveAndFlush(timeTable));
     }
 

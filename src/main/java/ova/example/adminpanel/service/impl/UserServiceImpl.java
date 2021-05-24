@@ -108,11 +108,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserWithRolesDTO getUserWithRoles(long id) {
-//        Optional<User> opUser = userRepository.findById(id);
-//        opUser.ifPresentOrElse(user -> UserWithRolesDTO.fromModel(user),
-//                () -> {
-//            log.error("Пользователь с id - {} не найдены в БД {}", id);
-//        });
         User user = null;
         try {
             user = userRepository.findById(id).orElseThrow();

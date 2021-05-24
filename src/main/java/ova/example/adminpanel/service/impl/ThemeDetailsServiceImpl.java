@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ThemeDetailsServiceImpl implements ThemeDetailsService {
     private final ThemeDetailsRepository themeDetailsRepo;
-    private final ProgramDetailsRepository programDetailsRepo;
+    private final ProgramDetailsServiceImpl programDetailsService;
 
     @Override
     public List<ThemeDetailsDTO> getAllThemeDetails() {
@@ -44,11 +44,8 @@ public class ThemeDetailsServiceImpl implements ThemeDetailsService {
     @Override
     public ThemeDetailsDTO createThemeDetails(ThemeDetailsDTO themeDetailsDTO) {
         ThemeDetails themeDetails = new ThemeDetails(themeDetailsDTO);
-        Optional<ProgramDetails> optionalProgramDetails = programDetailsRepo.findById(themeDetailsDTO.getProgramDetailsId());
-        if(optionalProgramDetails.isEmpty()){
-            log.error("Программа курса с id - {} не найдена", themeDetailsDTO.getProgramDetailsId());
-        }
-        themeDetails.setProgramDetails(optionalProgramDetails.get());
+        ProgramDetails programDetails = new ProgramDetails(programDetailsService.getProgramDetailsById(themeDetailsDTO.getProgramDetailsId()));
+        themeDetails.setProgramDetails(programDetails);
 
         return ThemeDetailsDTO.fromModel(themeDetailsRepo.saveAndFlush(themeDetails));
     }

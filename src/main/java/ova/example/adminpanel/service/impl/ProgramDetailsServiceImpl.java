@@ -20,7 +20,7 @@ import java.util.Optional;
 public class ProgramDetailsServiceImpl implements ProgramDetailsService {
 
     private final ProgramDetailsRepository programDetailsRepo;
-    private  final CourseProgramRepository courseProgramRepo;
+    private  final CourseProgramServiceImpl courseProgramService;
 
     @Override
     public List<ProgramDetailsDTO> getAllProgramDetails() {
@@ -46,11 +46,8 @@ public class ProgramDetailsServiceImpl implements ProgramDetailsService {
     @Override
     public ProgramDetailsDTO createProgramDetails(ProgramDetailsDTO programDetailsDTO) {
         ProgramDetails programDetails = new ProgramDetails(programDetailsDTO);
-        Optional<CourseProgram> courseProgramOptional = courseProgramRepo.findById(programDetailsDTO.getCourseProgramId());
-        if(courseProgramOptional.isEmpty()){
-            log.error("Программа курса с id {} не существует", programDetailsDTO.getCourseProgramId());
-        }
-        programDetails.setCourseProgram(courseProgramOptional.get());
+        CourseProgram courseProgram = new CourseProgram(courseProgramService.getCourseProgramById(programDetailsDTO.getCourseProgramId()));
+        programDetails.setCourseProgram(courseProgram);
 
         return ProgramDetailsDTO.fromModel(programDetailsRepo.saveAndFlush(programDetails));
     }
@@ -64,9 +61,8 @@ public class ProgramDetailsServiceImpl implements ProgramDetailsService {
         ProgramDetails programDetails = programDetailsOptional.get();
         programDetails.setLessonNumber(details.getLessonNumber());
         programDetails.setLessonTheme(details.getLessonTheme());
-        ProgramDetailsDTO programDetailsDTO = ProgramDetailsDTO.fromModel(programDetailsRepo.saveAndFlush(programDetails));
 
-        return programDetailsDTO;
+        return ProgramDetailsDTO.fromModel(programDetailsRepo.saveAndFlush(programDetails));
     }
 
     @Override

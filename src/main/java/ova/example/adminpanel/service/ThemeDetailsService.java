@@ -40,11 +40,10 @@ public interface ThemeDetailsService {
     ThemeDetailsDTO updateThemeDetails(ThemeDetailsDTO details);
 
     /**
-     * удалить модуль программы курса
+     * удалить детали темы
      *
-     * @param id модуля программы курса
+     * @param id темы
      *
      */
     void deleteThemeDetails(Long id);
-    // TODO: 29.04.2021 отредоктировать описание методов
 }

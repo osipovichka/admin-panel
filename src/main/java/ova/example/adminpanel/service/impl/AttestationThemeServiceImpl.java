@@ -7,7 +7,6 @@ import ova.example.adminpanel.DTO.AttestationThemeDTO;
 import ova.example.adminpanel.models.AttestationTheme;
 import ova.example.adminpanel.models.Course;
 import ova.example.adminpanel.repository.AttestationThemeRepository;
-import ova.example.adminpanel.repository.CourseRepository;
 import ova.example.adminpanel.service.AttestationThemeService;
 
 import java.util.ArrayList;
@@ -19,7 +18,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AttestationThemeServiceImpl implements AttestationThemeService {
     private final AttestationThemeRepository attestationThemeRepo;
-    private final CourseRepository courseRepo;
+    private final CourseServiceImpl courseService;
+
     @Override
     public List<AttestationThemeDTO> getAllAttestationTheme() {
         List<AttestationThemeDTO> attestationThemeDTOList = new ArrayList<>();
@@ -41,7 +41,8 @@ public class AttestationThemeServiceImpl implements AttestationThemeService {
     @Override
     public AttestationThemeDTO createAttestationTheme(AttestationThemeDTO attestationThemeDTO) {
         AttestationTheme attestationTheme = new AttestationTheme(attestationThemeDTO);
-        attestationTheme.setCourse(getCourseById(attestationThemeDTO.getId()));
+        Course course = new Course(courseService.getCourseById(attestationThemeDTO.getId()));
+        attestationTheme.setCourse(course);
 
         return AttestationThemeDTO.fromModel(attestationThemeRepo.saveAndFlush(attestationTheme));
     }
@@ -54,7 +55,8 @@ public class AttestationThemeServiceImpl implements AttestationThemeService {
         }
         AttestationTheme attestationTheme = attestationThemeOptional.get();
         attestationTheme.setTheme(details.getTheme());
-        attestationTheme.setCourse(getCourseById(details.getId()));
+        Course course = new Course(courseService.getCourseById(details.getId()));
+        attestationTheme.setCourse(course);
 
         return AttestationThemeDTO.fromModel(attestationThemeRepo.saveAndFlush(attestationTheme));
     }
@@ -62,15 +64,5 @@ public class AttestationThemeServiceImpl implements AttestationThemeService {
     @Override
     public void deleteAttestationTheme(Long id) {
         attestationThemeRepo.deleteById(id);
-    }
-
-    private Course getCourseById(Long id){
-        Optional<Course> courseOptional = courseRepo.findById(id);
-        if(courseOptional.isEmpty()){
-            log.error("Курс с id {} не существует", id);
-        }
-        Course course = courseOptional.get();
-
-        return course;
     }
 }
