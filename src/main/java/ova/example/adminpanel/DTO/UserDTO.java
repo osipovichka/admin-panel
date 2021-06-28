@@ -2,19 +2,12 @@ package ova.example.adminpanel.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ova.example.adminpanel.models.CourseProgramSkill;
-import ova.example.adminpanel.models.Group;
-import ova.example.adminpanel.models.Role;
 import ova.example.adminpanel.models.User;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor

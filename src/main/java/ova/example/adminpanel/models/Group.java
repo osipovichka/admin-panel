@@ -28,8 +28,9 @@ public class Group {
     @Column(name = "end_date")
     private Date endDate;
 
-    @Column(name = "course_program_id")
-    private Long courseProgramId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_program_id")
+    private CourseProgram courseProgram;
 
     @ManyToMany(mappedBy = "groups")
     private List<User> teachers;
@@ -39,12 +40,6 @@ public class Group {
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Lesson> lesson = new HashSet<>();
-
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TimeTable> timeTables = new HashSet<>();
-
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<New> news = new HashSet<>();
 
     public Group(GroupDTO groupDTO) {
         this.id = groupDTO.getId();

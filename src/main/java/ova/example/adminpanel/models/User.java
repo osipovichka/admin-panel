@@ -68,21 +68,8 @@ public class User {
     )
     private Set<Group> groups;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_skill",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_program_skill_id")
-    )
-    private Set<CourseProgramSkill> skills;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Journal> journals = new HashSet<>();
-
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<New> authorNews = new HashSet<>();
-
-    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<New> recipientNews = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserAttestation> userAttestations = new HashSet<>();

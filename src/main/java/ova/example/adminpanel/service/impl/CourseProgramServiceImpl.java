@@ -3,6 +3,7 @@ package ova.example.adminpanel.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ova.example.adminpanel.DTO.CourseDTO;
 import ova.example.adminpanel.DTO.CourseProgramDTO;
 import ova.example.adminpanel.models.Course;
 import ova.example.adminpanel.models.CourseProgram;
@@ -41,7 +42,7 @@ public class CourseProgramServiceImpl implements CourseProgramService {
     @Override
     public CourseProgramDTO createCourseProgram(CourseProgramDTO courseProgramDTO) {
         CourseProgram courseProgram = new CourseProgram(courseProgramDTO);
-        Course course = new Course(courseService.getCourseById(courseProgramDTO.getId()));
+        Course course = new Course(courseService.getCourseById(courseProgramDTO.getCourseId()));
         courseProgram.setCourse(course);
 
         return CourseProgramDTO.fromModel(courseProgramRepo.saveAndFlush(courseProgram));

@@ -15,6 +15,7 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class GroupDTO {
     private Long id;
+    private Long courseProgramId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date startDate;
@@ -25,6 +26,7 @@ public class GroupDTO {
     public static GroupDTO fromModel(Group group){
         GroupDTO groupDTO = new GroupDTO();
         groupDTO.setId(group.getId());
+        groupDTO.setCourseProgramId(group.getCourseProgram().getId());
         groupDTO.setStartDate(group.getStartDate());
         groupDTO.setEndDate(group.getEndDate());
 

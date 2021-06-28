@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ova.example.adminpanel.DTO.GroupDTO;
+import ova.example.adminpanel.models.CourseProgram;
 import ova.example.adminpanel.models.Group;
 import ova.example.adminpanel.repository.GroupRepository;
 import ova.example.adminpanel.service.GroupService;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
     private final GroupRepository groupRepo;
+    private final CourseProgramServiceImpl courseProgramService;
 
     @Override
     public List<GroupDTO> getAllGroup() {
@@ -43,6 +45,8 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public GroupDTO createGroup(GroupDTO groupDTO) {
         Group group = new Group(groupDTO);
+        CourseProgram courseProgram = new CourseProgram(courseProgramService.getCourseProgramById(groupDTO.getCourseProgramId()));
+        group.setCourseProgram(courseProgram);
         GroupDTO groupDto = GroupDTO.fromModel(groupRepo.saveAndFlush(group));
         return groupDto;
     }

@@ -7,7 +7,9 @@ import ova.example.adminpanel.DTO.LessonDTO;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -31,12 +33,9 @@ public class Lesson {
     private String read;
     private String videos;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "lesson_topic",
-            joinColumns = @JoinColumn(name = "lesson_id"),
-            inverseJoinColumns = @JoinColumn(name = "theme_details_id")
-    )
-    private List<ThemeDetails> themeDetails;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "program_details_id")
+    private ProgramDetails programDetails;
 
     public Lesson(LessonDTO lessonDTO){
         this.id = lessonDTO.getId();
