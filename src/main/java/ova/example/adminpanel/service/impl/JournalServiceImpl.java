@@ -59,7 +59,6 @@ public class JournalServiceImpl implements JournalService {
         journal.setLessonId(details.getLessonId());
         journal.setAbsent(details.isAbsent());
         journal.setAbsentReason(details.getAbsentReason());
-        journal.setFeadback(details.getFeadback());
 
         return JournalDTO.fromModel(journalRepo.saveAndFlush(journal));
     }

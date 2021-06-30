@@ -14,10 +14,3 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-
-#logging:
-  #level:
-    #org.springframework.web: ERROR
-    #eva.examle: DEBAG
-  #pattern:
-    #console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

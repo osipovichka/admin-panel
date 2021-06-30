@@ -31,13 +31,10 @@ public class Journal {
     @Column(name = "absent_reason")
     private String absentReason;
 
-    private String feadback;
-
     public Journal(JournalDTO journalDTO){
         this.id = journalDTO.getId();
         this.lessonId = journalDTO.getLessonId();
         this.absent = journalDTO.isAbsent();
         this.absentReason = journalDTO.getAbsentReason();
-        this.feadback = journalDTO.getFeadback();
     }
 }
