@@ -47,13 +47,6 @@ public interface UserService {
     void deleteUser(long id);
 
     /**
-     * Добавить пользователю роль.
-     *
-     * @param userId roleId пользователь с изменениями.
-     */
-    public void addUserRole(long userId, long roleId);
-
-    /**
      * Получить пользователя со списком его ролей по id.
      *
      * @param id пользователя.

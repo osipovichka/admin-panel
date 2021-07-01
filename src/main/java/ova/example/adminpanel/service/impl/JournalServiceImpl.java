@@ -34,7 +34,7 @@ public class JournalServiceImpl implements JournalService {
     public JournalDTO getJournalById(long id) {
         Optional<Journal> opJournal = journalRepo.findById(id);
         if(opJournal.isEmpty()){
-            log.error("Журнал с id - {} не найден", id);
+            log.info("Журнал с id - {} не найден", id);
         }
 
         return JournalDTO.fromModel(opJournal.get());
@@ -53,7 +53,7 @@ public class JournalServiceImpl implements JournalService {
     public JournalDTO updateJournal(JournalDTO details) {
         Optional<Journal> journalOptional = journalRepo.findById(details.getId());
         if(journalOptional.isEmpty()){
-            log.error("Журнал с id - {} не найден", details.getId());
+            log.info("Журнал с id - {} не найден", details.getId());
         }
         Journal journal = journalOptional.get();
         journal.setLessonId(details.getLessonId());

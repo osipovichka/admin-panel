@@ -36,7 +36,7 @@ public class ProgramDetailsServiceImpl implements ProgramDetailsService {
     public ProgramDetailsDTO getProgramDetailsById(Long id) {
         Optional<ProgramDetails> programDetailsOptional = programDetailsRepo.findById(id);
         if(programDetailsOptional.isEmpty()){
-            log.error("Модуль с id - {} не найден", id);
+            log.info("Модуль с id - {} не найден", id);
         }
         ProgramDetails programDetails = programDetailsOptional.get();
 
@@ -56,7 +56,7 @@ public class ProgramDetailsServiceImpl implements ProgramDetailsService {
     public ProgramDetailsDTO updateProgramDetails(ProgramDetailsDTO details) {
         Optional<ProgramDetails> programDetailsOptional = programDetailsRepo.findById(details.getId());
         if(programDetailsOptional.isEmpty()){
-            log.error("Программа курса с id - {} не существует", details.getId());
+            log.info("Программа курса с id - {} не существует", details.getId());
         }
         ProgramDetails programDetails = programDetailsOptional.get();
         programDetails.setLessonNumber(details.getLessonNumber());

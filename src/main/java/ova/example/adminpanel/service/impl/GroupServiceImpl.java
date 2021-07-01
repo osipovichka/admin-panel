@@ -37,7 +37,7 @@ public class GroupServiceImpl implements GroupService {
         try {
             groupDTO = GroupDTO.fromModel(groupRepo.findById(id).orElseThrow());
         } catch (NoSuchElementException e) {
-            log.error("Группа с id - {} не найден в БД {}", id, e.getMessage(), e);
+            log.info("Группа с id - {} не найден в БД {}", id, e.getMessage(), e);
         }
         return groupDTO;
     }
@@ -55,7 +55,7 @@ public class GroupServiceImpl implements GroupService {
     public GroupDTO updateGroup(GroupDTO groupDetails) {
         Optional<Group> opGroup = groupRepo.findById(groupDetails.getId());
         if (opGroup.isEmpty()){
-            log.error("Группа с id - {} не найдена", groupDetails.getId());
+            log.info("Группа с id - {} не найдена", groupDetails.getId());
         }
         Group group = opGroup.get();
         group.setStartDate(groupDetails.getStartDate());

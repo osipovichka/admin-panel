@@ -34,7 +34,7 @@ public class CourseProgramServiceImpl implements CourseProgramService {
     public CourseProgramDTO getCourseProgramById(Long id) {
         Optional<CourseProgram> courseProgramOptional = courseProgramRepo.findById(id);
         if(courseProgramOptional.isEmpty()){
-            log.error("Программа с id - {} не найдена", id);
+            log.info("Программа с id - {} не найдена", id);
         }
         return CourseProgramDTO.fromModel(courseProgramOptional.get());
     }
@@ -52,7 +52,7 @@ public class CourseProgramServiceImpl implements CourseProgramService {
     public CourseProgramDTO updateCourseProgram(CourseProgramDTO courseProgramDetails) {
         Optional<CourseProgram> courseProgramOptional = courseProgramRepo.findById(courseProgramDetails.getId());
         if(courseProgramOptional.isEmpty()){
-            log.error("Программа с id - {} не найдена", courseProgramDetails.getId());
+            log.info("Программа с id - {} не найдена", courseProgramDetails.getId());
         }
         CourseProgram courseProgram = courseProgramOptional.get();
         courseProgram.setActual(courseProgramDetails.isActual());

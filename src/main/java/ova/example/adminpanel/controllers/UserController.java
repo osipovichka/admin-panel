@@ -87,20 +87,6 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("/AddUser_Role/{userId}/{roleId}")
-    @Operation(summary = "Добавить пользователю роль", method = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роль добаавлена",
-                    content = @Content(mediaType = MediaType.ALL_VALUE))})
-    public ResponseEntity addUserRole(@PathVariable @Parameter(description = "id - пользователя") Long userId,
-                                      @PathVariable @Parameter(description = "id - добовляемой роли") Long roleId){
-        if(userId == 0 || roleId == 0){
-            ResponseEntity.status(HttpStatus.BAD_REQUEST);
-        }
-        userServiceImpl.addUserRole(userId, roleId);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @GetMapping("/User_Roles/{id}")
     @Operation(summary = "Получить пользователя с его ролями", method = "GET")
     @ApiResponses(value = {

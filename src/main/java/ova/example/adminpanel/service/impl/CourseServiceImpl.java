@@ -31,7 +31,7 @@ public class CourseServiceImpl implements CourseService {
     public CourseDTO getCourseById(Long id) {
         Optional<Course> opCourse = courseRepo.findById(id);
         if(opCourse.isEmpty()){
-            log.error("Курс с id - {} не найден", id);
+            log.info("Курс с id - {} не найден", id);
         }
 
         return CourseDTO.fromModel(opCourse.get());
@@ -48,7 +48,7 @@ public class CourseServiceImpl implements CourseService {
     public CourseDTO updateCourse(CourseDTO courseDetails) {
         Optional<Course> opCourse = courseRepo.findById(courseDetails.getId());
         if(opCourse.isEmpty()){
-            log.error("Курс с id - {} не найден", courseDetails.getId());
+            log.info("Курс с id - {} не найден", courseDetails.getId());
         }
         Course course = opCourse.get();
         course.setName(courseDetails.getName());

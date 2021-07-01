@@ -90,23 +90,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserRole(long userId, long roleId) {
-        Optional<Role> opRole = roleRepository.findById(roleId);
-        if (opRole.isEmpty()){
-            log.error("Роль с id - {} не найдены в БД", roleId);
-        }
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isEmpty()){
-            log.error("Пользователь с id - {} не найдены в БД", userId);
-        }
-        User user = optionalUser.get();
-        Set<Role> role = user.getRoles();
-        role.add(opRole.get());
-        user.setRoles(role);
-        userRepository.saveAndFlush(user);
-    }
-
-    @Override
     public UserWithRolesDTO getUserWithRoles(long id) {
         User user = null;
         try {

@@ -36,7 +36,7 @@ public class UserAttestationServiceImpl implements UserAttestationService {
     public UserAttestationDTO getUserAttestationById(Long id) {
         Optional<UserAttestation> userAttestation = userAttestationRepo.findById(id);
         if(userAttestation.isEmpty()){
-            log.error("Аттестация с id - {} не найдена", id);
+            log.info("Аттестация с id - {} не найдена", id);
         }
 
         return UserAttestationDTO.fromModel(userAttestation.get());

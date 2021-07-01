@@ -33,7 +33,7 @@ public class AttestationThemeServiceImpl implements AttestationThemeService {
     public AttestationThemeDTO getAttestationThemeById(Long id) {
         Optional<AttestationTheme> attestationThemeOptional= attestationThemeRepo.findById(id);
         if(attestationThemeOptional.isEmpty()){
-            log.error("Аттестационная тема с id - {} не существует", id);
+            log.info("Аттестационная тема с id - {} не существует", id);
         }
         return AttestationThemeDTO.fromModel(attestationThemeOptional.get());
     }
@@ -51,7 +51,7 @@ public class AttestationThemeServiceImpl implements AttestationThemeService {
     public AttestationThemeDTO updateAttestationTheme(AttestationThemeDTO details) {
         Optional<AttestationTheme> attestationThemeOptional = attestationThemeRepo.findById(details.getId());
         if(attestationThemeOptional.isEmpty()){
-            log.error("Аттестационная тема с id - {} не существует", details.getId());
+            log.info("Аттестационная тема с id - {} не существует", details.getId());
         }
         AttestationTheme attestationTheme = attestationThemeOptional.get();
         attestationTheme.setTheme(details.getTheme());

@@ -32,7 +32,7 @@ public class LessonServiceImpl implements LessonService {
     public LessonDTO getLessonById(long id) {
         Optional<Lesson> lessonOptional = lessonRepo.findById(id);
         if(lessonOptional.isEmpty()){
-            log.error("Урок с id - {} не найден", id);
+            log.info("Урок с id - {} не найден", id);
         }
         return LessonDTO.fromModel(lessonOptional.get());
     }
@@ -48,7 +48,7 @@ public class LessonServiceImpl implements LessonService {
     public LessonDTO updateLesson(LessonDTO details) {
         Optional<Lesson> lessonOptional = lessonRepo.findById(details.getId());
         if(lessonOptional.isEmpty()){
-            log.error("Урок с id - {} не найден", details.getId());
+            log.info("Урок с id - {} не найден", details.getId());
         }
         Lesson lesson = lessonOptional.get();
         lesson.setDay(details.getDay());
